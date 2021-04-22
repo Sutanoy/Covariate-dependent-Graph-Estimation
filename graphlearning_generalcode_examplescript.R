@@ -338,8 +338,8 @@ ELBO_calculator=function(y,X_mat,S_sq,mu,alpha, sigmasq, sigmabeta_sq, true_pi, 
   a=heat_alpha
   for(i in 1:(p+1)){
     for(j in i:(p+1)){
-      #  a[i,j]=max(heat_alpha[i,j],heat_alpha[j,i])
-      a[i,j]=mean(c(heat_alpha[i,j],heat_alpha[j,i]))
+       a[i,j]=max(heat_alpha[i,j],heat_alpha[j,i])
+    #  a[i,j]=mean(c(heat_alpha[i,j],heat_alpha[j,i]))
       a[j,i]=a[i,j]
     }
   }
@@ -372,8 +372,8 @@ ELBO_calculator=function(y,X_mat,S_sq,mu,alpha, sigmasq, sigmabeta_sq, true_pi, 
   a=heat_alpha
   for(i in 1:(p+1)){
     for(j in i:(p+1)){
-      #   a[i,j]=max(heat_alpha[i,j],heat_alpha[j,i])
-      a[i,j]=mean(c(heat_alpha[i,j],heat_alpha[j,i]))
+        a[i,j]=max(heat_alpha[i,j],heat_alpha[j,i])
+    #  a[i,j]=mean(c(heat_alpha[i,j],heat_alpha[j,i]))
       a[j,i]=a[i,j]
     }
   }
@@ -435,7 +435,7 @@ a=heat_alpha
 for(i in 1:(p+1)){
   for(j in i:(p+1)){
     a[i,j]=max(heat_alpha[i,j],heat_alpha[j,i])
-    a[i,j]=0.5*(heat_alpha[i,j]+heat_alpha[j,i])
+  #  a[i,j]=0.5*(heat_alpha[i,j]+heat_alpha[j,i])
     a[j,i]=a[i,j]
   }
 }
@@ -550,7 +550,7 @@ a=heat_alpha
 for(i in 1:(p+1)){
   for(j in i:(p+1)){
     a[i,j]=max(heat_alpha[i,j],heat_alpha[j,i])
-    a[i,j]=0.5*(heat_alpha[i,j]+heat_alpha[j,i])
+ #   a[i,j]=0.5*(heat_alpha[i,j]+heat_alpha[j,i])
     a[j,i]=a[i,j]
   }
 }
