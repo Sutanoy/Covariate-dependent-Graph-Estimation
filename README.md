@@ -1,1 +1,3 @@
 # Covariate-dependent-Graph-Estimation
+
+There are two demo codes in this repository which showcases the practical performance of the graph estimator proposed in our paper "An approximate Bayesian approach to covariate dependent graphical modeling". The code graphlearning_generalcode_examplescript.R considers the case of discrete covariates. The user is invited to play with the code and change the underlying true distribution to consider the covariate -independent (the current demo considers this case) or the covariate dependent case (an example presented in paper is also included in code as comments). The code cont_covariate_attempt2.R considers the toy example presented in the paper with continuous covariates.
