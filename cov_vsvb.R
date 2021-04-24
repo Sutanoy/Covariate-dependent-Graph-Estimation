@@ -12,13 +12,13 @@
 ##sigmasq: variance of response given the parameters (homoscedastic part, actual variance sigma_sq/w_i)
 ##sigmabeta_sq: prior variance of coefficient parameter
 ##true_pi: estimate of spike and slab mixture proportion.
-## Ignore the lambda parameters for now. It will be updated/removed soon.
 
-cov_vsvb= function(y,X,Z,XtX,DXtX,Diff_mat,Xty,sigmasq,sigmabeta_sq,lambda_mean,lambda_var,L0,true_pi){
+
+cov_vsvb= function(y,X,Z,XtX,DXtX,Diff_mat,Xty,sigmasq,sigmabeta_sq,true_pi){
   
   thres=1e-7
   tol=1e-9
-  mu0_lambda<-L0*rep(1,p)
+  
   msg <- function(s, ...)
   {
     time <- format(Sys.time(), "%X")
@@ -99,5 +99,5 @@ cov_vsvb= function(y,X,Z,XtX,DXtX,Diff_mat,Xty,sigmasq,sigmabeta_sq,lambda_mean,
     iter=iter+1
   }
   ELBO_LBit=ELBO_LBit[1:(iter-1)]
-  list(var.alpha=alpha, var.mu=mu_mat, var.S_sq=S_sq, var.mu0_lambda=mu0_lambda, var.Sigma0_lambda=Sigma0_lambda, var.elbo=ELBO_LB,var.elboit=ELBO_LBit)
+  list(var.alpha=alpha, var.mu=mu_mat, var.S_sq=S_sq, var.elbo=ELBO_LB,var.elboit=ELBO_LBit)
 }
