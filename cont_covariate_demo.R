@@ -212,13 +212,13 @@ for(overiter in 1:MAXITER){
     sigmavec=c(0.01,0.05,0.1,0.5,1,3,7,10)
     elb1=matrix(0,length(sigmavec),1)
     for(j in 1:length(sigmavec)){
-      res=cov_vsvb(y,X,Z,XtX,DXtX,Diff_mat,Xty,sigmasq,sigmavec[j],lambda_mean,lambda_var,0,pi_est)
+      res=cov_vsvb(y,X,Z,XtX,DXtX,Diff_mat,Xty,sigmasq,sigmavec[j],pi_est)
       elb1[j]=res$var.elbo
       
     }
     sigmabeta_sq=sigmavec[which.max(elb1)]
     
-    result=cov_vsvb(y,X,Z,XtX,DXtX,Diff_mat,Xty,sigmasq, sigmabeta_sq,lambda_mean,lambda_var,0,pi_est)
+    result=cov_vsvb(y,X,Z,XtX,DXtX,Diff_mat,Xty,sigmasq, sigmabeta_sq,pi_est)
     incl_prob=result$var.alpha
     mu0_val=result$var.mu0_lambda
     
@@ -244,7 +244,8 @@ for(overiter in 1:MAXITER){
   a=heat_alpha
   for(i in 1:(p+1)){
     for(j in i:(p+1)){
-      a[i,j]=max(heat_alpha[i,j],heat_alpha[j,i])
+  #    a[i,j]=max(heat_alpha[i,j],heat_alpha[j,i])
+      a[i,j]=0.5*(heat_alpha[i,j]+heat_alpha[j,i])
       a[j,i]=a[i,j]
     }
   }
@@ -274,7 +275,8 @@ for(overiter in 1:MAXITER){
   a=heat_alpha
   for(i in 1:(p+1)){
     for(j in i:(p+1)){
-      a[i,j]=max(heat_alpha[i,j],heat_alpha[j,i])
+  #    a[i,j]=max(heat_alpha[i,j],heat_alpha[j,i])
+      a[i,j]=0.5*(heat_alpha[i,j]+heat_alpha[j,i])
       a[j,i]=a[i,j]
     }
   }
@@ -304,7 +306,8 @@ for(overiter in 1:MAXITER){
   a=heat_alpha
   for(i in 1:(p+1)){
     for(j in i:(p+1)){
-      a[i,j]=max(heat_alpha[i,j],heat_alpha[j,i])
+  #    a[i,j]=max(heat_alpha[i,j],heat_alpha[j,i])
+      a[i,j]=0.5*(heat_alpha[i,j]+heat_alpha[j,i])
       a[j,i]=a[i,j]
     }
   }
@@ -376,7 +379,8 @@ heat_alpha=alph
 a=heat_alpha
 for(i in 1:(p+1)){
   for(j in i:(p+1)){
-    a[i,j]=max(heat_alpha[i,j],heat_alpha[j,i])
+#    a[i,j]=max(heat_alpha[i,j],heat_alpha[j,i])
+    a[i,j]=0.5*(heat_alpha[i,j]+heat_alpha[j,i])
     a[j,i]=a[i,j]
   }
 }
@@ -487,7 +491,8 @@ heat_alpha=alph
 a=heat_alpha
 for(i in 1:(p+1)){
   for(j in i:(p+1)){
-    a[i,j]=max(heat_alpha[i,j],heat_alpha[j,i])
+ #   a[i,j]=max(heat_alpha[i,j],heat_alpha[j,i])
+    a[i,j]=0.5*(heat_alpha[i,j]+heat_alpha[j,i])
     a[j,i]=a[i,j]
   }
 }
@@ -599,7 +604,8 @@ heat_alpha=alph
 a=heat_alpha
 for(i in 1:(p+1)){
   for(j in i:(p+1)){
-    a[i,j]=max(heat_alpha[i,j],heat_alpha[j,i])
+  #  a[i,j]=max(heat_alpha[i,j],heat_alpha[j,i])
+    a[i,j]=0.5*(heat_alpha[i,j]+heat_alpha[j,i])
     a[j,i]=a[i,j]
   }
 }
