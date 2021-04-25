@@ -33,15 +33,15 @@ p <- 10
 # setdiff1=sensitivity_1
 # setdiff100=setdiff1
 
-#############################
+############################# generating the precision matrix.:Assume two discrete covariate levels
 Lam1=matrix(0,p+1,1)
 Lam2=Lam1
 Lam1=c(3,3,3,3,rep(0,p-3))*5#For Z[i]=-0.1
-Lam2=Lam1
+Lam2=Lam1 #Same lambda for both covariate levels, corresponds to covariate independent levels
 #Lam2=c(3,3,3,3,3,3,3,0,0,0,0)*5#For Z[i]= 0.1
-# Lam2=c(rep(0,p-3),3,3,3,3)*5#For Z[i]= 0.1
-Var1=solve(Lam1%*%t(Lam1) + diag(rep(10,p+1)))
-Var2=solve(Lam2%*%t(Lam2) + diag(rep(10,p+1)))
+# Lam2=c(rep(0,p-3),3,3,3,3)*5#For Z[i]= 0.1 #corresponds to covariate dependent model, uncomment to try this out.
+Var1=solve(Lam1%*%t(Lam1) + diag(rep(10,p+1))) #covariance matrix for covariate level 1
+Var2=solve(Lam2%*%t(Lam2) + diag(rep(10,p+1))) #covariance matrix for covariate level 2
 
 X1=mvrnorm(n/2,rep(0,p+1),Var1)
 X2=mvrnorm(n/2,rep(0,p+1),Var2)
@@ -62,7 +62,7 @@ data_mat=rbind(X1,X2)
 
 Adj_Mat_vb <- array(0,dim=c(p+1,p+1))
 ###############################################
-for(resp_index in 1:(p+1)){
+for(resp_index in 1:(p+1)){ #This loops over the p+1 variables
   for(i in 1:n){
     beta[i,]=(t(Lam1[-resp_index])>0)*(i<=n/2) + (t(Lam2[-resp_index])>0)*(i>n/2)
     
