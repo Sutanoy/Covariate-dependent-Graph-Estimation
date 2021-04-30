@@ -47,16 +47,15 @@ X1=mvrnorm(n/2,rep(0,p+1),Var1)
 X2=mvrnorm(n/2,rep(0,p+1),Var2)
 ######### Generating the covariates ##########
 
-#Z=matrix(rnorm(n*p, -1,2),ncol=p)
-Z=matrix(-1,n,p)
-#Z=matrix(runif(n*p, -2,.1),ncol=p)
-beta=matrix(0,n,p)
+
+Z=matrix(-1,n,p) #Initializing the covariate matrix
+
+beta=matrix(0,n,p) # Ground truth of the dependence structure
 resp_index=1;# The index we consider as response
-mylist <- rep(list(beta),p+1)
+mylist <- rep(list(beta),p+1) #The variable specific inclusion probability matrix:ith row corresponds to the dependence structure for the i th subject, j th matrix corresponds to 
+                       # the j th variable as response and the remaining as predictors.
 data_mat=rbind(X1,X2)
-# for(j in 1:(p+1)){
-#   data_mat[,j]=data_mat[,j]/norm(data_mat[,j],"2")
-# }
+
 
 
 
@@ -64,19 +63,19 @@ Adj_Mat_vb <- array(0,dim=c(p+1,p+1))
 ###############################################
 for(resp_index in 1:(p+1)){ #This loops over the p+1 variables
   for(i in 1:n){
-    beta[i,]=(t(Lam1[-resp_index])>0)*(i<=n/2) + (t(Lam2[-resp_index])>0)*(i>n/2)
+    beta[i,]=(t(Lam1[-resp_index])>0)*(i<=n/2) + (t(Lam2[-resp_index])>0)*(i>n/2) #Ground truth
     
     for(j in 1:p){
-      # Z[i,j]=rnorm(1,-2,.1)*(i<50) +rnorm(1,2,0.1)*(i>=50)
+      # Z[i,j]=rnorm(1,-2,.1)*(i<50) +rnorm(1,2,0.1)*(i>=50) #Uncomment to lay with other covariate values 
       Z[i,j]=-.1*(i<=n/2)  + .1*(i>n/2)
     }
   }
   ######################
   
   ##############
-  y=data_mat[,resp_index];
+  y=data_mat[,resp_index]; #Set variable number `resp_index` as the response
   
-  X_mat=data_mat[,-resp_index]
+  X_mat=data_mat[,-resp_index] #Set the remaining p variables as predictor.
   X_vec <- matrix(0,n*p,1)
   #X<- matrix(rep(0,n^2*p),nrow=n,ncol=n*p)
   
@@ -97,12 +96,11 @@ for(resp_index in 1:(p+1)){ #This loops over the p+1 variables
       Big_diag_mat[i,k+j]=1
     }
   }
-  A_xi=rep(1,n)
-  #X <- matrix(rnorm(n*p,0,1), ncol=p)
+  
   q=matrix(2,n,1)
   
   
-  sigmasq=1
+  sigmasq=1 #Initialization of the hyperparameter value
   E <- rnorm(n,0,sigmasq)
   
   
@@ -121,20 +119,15 @@ for(resp_index in 1:(p+1)){ #This loops over the p+1 variables
     }
   }
   for(i in 1:n){
-    D[,i]=n*(D[,i]/sum(D[,i]))
-    #      D[,i]=1
+    D[,i]=n*(D[,i]/sum(D[,i])) #Scaling the weights so that they add up to n
+    #      D[,i]=1 # When there is no covariate information, set the weights to be 1 throughout.
   }
   
-  true_lambda=0.5*rep(1,p)
-  L0=0.5
-  lambda_mean=true_lambda##rep(0,p) ###rnorm(p,0,4)
-  lambda_var=.001*diag(p)
-  mu0_lambda<-L0*rep(1,p)## rep(0,p)
-  Sigma0_lambda=lambda_var###diag(p)
-  alpha= rep(0.2,n*p)
-  sigmabeta_sq=3
-  mu=rep(0,p)
-  true_pi=0.5
+  
+  alpha= rep(0.2,n*p) #Initialization of the inclusion probability matrix for a fixed variable, with i th row corresponding to i th subject.
+  sigmabeta_sq=3 #Initialization for hyperparameter
+  mu=rep(0,p) # Variational parameter
+  true_pi=0.5 #Hyperparameter
   
   
   ###########
@@ -153,9 +146,8 @@ for(resp_index in 1:(p+1)){ #This loops over the p+1 variables
   }
   
   
-  S_sq=matrix(sigmasq*(DXtX + 1/sigmabeta_sq)^(-1),n,p)
-  Sigma_xi=diag(p)
-  S0=solve(lambda_var)
+  S_sq=matrix(sigmasq*(DXtX + 1/sigmabeta_sq)^(-1),n,p) #Initialization
+  
   iter=1
   ###############################################
   
@@ -186,7 +178,7 @@ for(resp_index in 1:(p+1)){ #This loops over the p+1 variables
   beta_matr=matrix(0,n,p)
   
   ####################tuning hyperparameters##################################
-  idmod=varbvs(X_mat,y,Z=Z[,1],verbose=FALSE)
+  idmod=varbvs(X_mat,y,Z=Z[,1],verbose=FALSE)#Setting hyperparameter value as in Carbonetto Stephens model
   inprob=idmod$pip
   rest_index_set=setdiff(c(1:(p+1)),resp_index)
   
@@ -199,7 +191,7 @@ for(resp_index in 1:(p+1)){ #This loops over the p+1 variables
     elb1[j]=res$var.elbo
     
   }
-  sigmabeta_sq=sigmavec[which.max(elb1)]
+  sigmabeta_sq=sigmavec[which.max(elb1)] #Choosing hyperparameter based on ELBO maximization
   
   result=cov_vsvb(y,X,Z,XtX,DXtX,Diff_mat,Xty,sigmasq, sigmabeta_sq,pi_est)
   incl_prob=result$var.alpha
@@ -218,7 +210,7 @@ alph=matrix(0,p+1,p+1)
 
 SUBJECT=1
 for(i in 1:(p+1)){
-  alph[i,-i]=mylist[[i]][SUBJECT,];
+  alph[i,-i]=mylist[[i]][SUBJECT,]; #Individual specific inclusion probability matrix
 }
 beta=matrix(0,p+1,p+1)
 for(i in 1:(p+1)){
