@@ -14,6 +14,7 @@ In this file, it is assumed that there are 2 discrete covariate levels. The data
 
 #2. Covariate dependent model
 ![equation](https://latex.codecogs.com/gif.latex?%5Clambda_%7B1%7D%3D%20%7B%5B15%7B%5Cbf%201%7D_4%7E%7E%20%2C%20%7E%7E%7B%5Cbf%200%7D_%7Bp-3%7D%5D%7D%5E%7B%5Cmathrm%7BT%7D%7D)
+
 ![equation](https://latex.codecogs.com/gif.latex?%5Clambda_%7B2%7D%3D%20%7B%5B%7B%5Cbf%200%7D_%7Bp-3%7D%7E%7E%20%2C%20%7E%7E15%7B%5Cbf%201%7D_%7B4%7D%5D%7D%5E%7B%5Cmathrm%7BT%7D%7D)
 
 The precision matrix `\Omega_1 = \lambda_1\lambda_1^T + 10 I`, where `I` is the identity matrix. Similarly, `\Omega_2= \lambda_2\lambda_2^T + 10 I`.
