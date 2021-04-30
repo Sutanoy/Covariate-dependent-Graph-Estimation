@@ -7,7 +7,7 @@ Overview of discrete_covariate_demo.R:
 One can simply run the demo as is to get some demo examples and some visual results through a heatmap and histograms.
 
 ## Data generation
-In this file, it is assumed that there are 2 discrete covariate levels. The data are generated from two different covariance matrices as an example, controlled by a \lambda parameter. Depending on whether \lambda_1= \lambda_2, we have the covariate independent model or the covariate dependent model. Set no. of subjects in study to be `n` and number of variables to be `p+1`.
+In this file, it is assumed that there are 2 discrete covariate levels. The data are generated from two different covariance matrices as an example, controlled by a https://latex.codecogs.com/gif.latex?%5Clambda parameter. Depending on whether \lambda_1= \lambda_2, we have the covariate independent model or the covariate dependent model. Set no. of subjects in study to be `n` and number of variables to be `p+1`.
 
 #1. Covariate independent model
 `\lambda_1 = \lambda_2 = [15,15,15,15, 0,... 0]`
