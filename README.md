@@ -2,12 +2,11 @@
 
 There are two demo codes in this repository which showcases the practical performance of the graph estimator proposed in our paper "An approximate Bayesian approach to covariate dependent graphical modeling". The code discrete_covariate_demo.R considers the case of discrete covariates. The code cont_covariate_attempt2.R considers the toy example presented in the paper with continuous covariates. The cov_vsvb.R and ELBO_calculator are functions called by the demo codes. Specifically, the function cov_vsvb updates the variational parameters and returns the converged estimates for a single graph.
 
-########################################
 Overview of discrete_covariate_demo.R:
-
+=====================================
 One can simply run the demo as is to get some demo examples and some visual results through a heatmap and histograms.
 
-### Data generation
+## Data generation
 In this file, it is assumed that there are 2 discrete covariate levels. The data are generated from two different covariance matrices as an example, controlled by a \lambda parameter. Depending on whether \lambda_1= \lambda_2, we have the covariate independent model or the covariate dependent model. 
 
 #1. Covariate independent model
@@ -39,6 +38,6 @@ The code calls the cov_vsvb function, which updates the variational parameters a
 The cov_vsvb function itself calls the ELBO_calculator function, which calculates the ELBO corresponding to the current values of the variational parameters for a specific graph corresponding to a single individual. Note the contribution of every individual in the study to the ELBO of the parameters corresponding to a single individual, facilitating the borrowing of information.
 
 #####################################
-To run the cont_covariate_demo.R:
+Overview of cont_covariate_demo.R:
 
 In this file, instead of discrete covariate values, we have three clusters of covariate values, and the individuals in the study have covariate values belonging to one of the three clusters.
