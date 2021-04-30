@@ -7,10 +7,10 @@ Overview of discrete_covariate_demo.R:
 One can simply run the demo as is to get some demo examples and some visual results through a heatmap and histograms.
 
 ## Data generation
-In this file, it is assumed that there are 2 discrete covariate levels. The data are generated from two different covariance matrices as an example, controlled by a ![equation](https://latex.codecogs.com/gif.latex?%5Clambda) parameter. Depending on whether \lambda_1= \lambda_2, we have the covariate independent model or the covariate dependent model. Set no. of subjects in study to be `n` and number of variables to be `p+1`.
+In this file, it is assumed that there are 2 discrete covariate levels. The data are generated from two different covariance matrices as an example, controlled by a ![equation](https://latex.codecogs.com/gif.latex?%5Clambda) parameter. Depending on whether ![equation](https://latex.codecogs.com/gif.latex?%5Clambda_1%3D%5Clambda_2), we have the covariate independent model or the covariate dependent model. Set no. of subjects in study to be `n` and number of variables to be `p+1`.
 
 #1. Covariate independent model
-`\lambda_1 = \lambda_2 = [15,15,15,15, 0,... 0]`
+`\lambda_1 = \lambda_2 = ![equation](https://latex.codecogs.com/gif.latex?%7B%5B15%7B%5Cbf%201%7D_4%7E%7E%20%2C%20%7E%7E%7B%5Cbf%200%7D_%7Bp-3%7D%5D%7D%5E%7B%5Cmathrm%7BT%7D%7D)
 
 #2. Covariate dependent model
 `\lambda_1 = [15,15,15,15,0,...0]`
