@@ -46,7 +46,7 @@ Overview of cont_covariate_demo.R:
 In this file, instead of discrete covariate values, we have three clusters of covariate values, and the individuals in the study have covariate values belonging to one of the three clusters. 
 
 ## Data generation
-We set n=180 and `p=4`, i.e. there are `5` variables in this toy example. We have univariate covariates associated with every individual. 
+We set `n=180` and `p=4`, i.e. there are `5` variables in this toy example. We have univariate covariates associated with every individual. 
 
 `Z ~ Uniform (-1,-0.3) U (-0.23, 0.33) U (0.43, 1)` corresponding to three well-separated clusters. 
 We have the precision matrix defined as a function of the covariate Z, through the var_cont function as 
