@@ -53,4 +53,8 @@ We have the precision matrix defined as a function of the covariate Z, through t
 
 ![equation](https://latex.codecogs.com/gif.latex?%5COmega%5Ei%28z_i%29%3D%20%5Cbegin%7Bbmatrix%7D%202%20%26%20%5Comega_%7B1%2C2%7D%28z_i%29%20%26%20%5Comega_%7B1%2C3%7D%28z_i%29%20%260%20%260%20%5C%5C%20%5Comega_%7B1%2C2%7D%28z_i%29%20%26%202%20%26%201%20%260%20%260%5C%5C%20%5Comega_%7B1%2C3%7D%28z_i%29%20%26%201%20%26%202%20%26%200%20%26%200%5C%5C%200%20%26%200%20%260%20%262%20%260%5C%5C%200%26%200%26%200%20%26%200%20%26%202%20%5Cend%7Bbmatrix%7D)
 
+where
+
+![equation](https://latex.codecogs.com/gif.latex?%5Comega_%7B1%2C2%7D%28z_i%29%3D%5Cbegin%7Bcases%7D%20%241%24%20%26%20%5Ctext%7B%20if%20%24-1%20%3C%20z_i%20%3C-0.33%24%7D%20%5C%5C%201-%20%5Cfrac%7Bz_i%20&plus;%200.23%7D%7B0.33&plus;0.23%7D%20%26%20%5Ctext%7B%20if%20%24-0.23%3Cz_i%3C0.33%24%7D%5C%5C%20%240%24%20%26%20%5Ctext%7B%20if%20%240.33%3Cz%3C1%24%7D%20%5Cend%7Bcases%7D%20%2C%20%5Comega_%7B1%2C3%7D%28z_i%29%3D%5Cbegin%7Bcases%7D%20%240%24%20%26%20%5Ctext%7B%20if%20%24-1%20%3C%20z_i%20%3C-0.33%24%7D%20%5C%5C%20%5Cfrac%7Bz_i%20&plus;%200.23%7D%7B0.33&plus;0.23%7D%20%26%20%5Ctext%7B%20if%20%24-0.23%3Cz_i%3C0.33%24%7D%5C%5C%20%241%24%20%26%20%5Ctext%7B%20if%20%240.33%3Cz%3C1%24%7D.%20%5Cend%7Bcases%7D)
+
 The rest of the steps are identical to the discrete covariate case.
