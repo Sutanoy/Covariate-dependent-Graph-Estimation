@@ -20,20 +20,20 @@ In this file, it is assumed that there are 2 discrete covariate levels. The data
 ![equation](https://latex.codecogs.com/gif.latex?%5Clambda_%7B2%7D%3D%20%7B%5B%7B%5Cbf%200%7D_%7Bp-3%7D%7E%7E%20%2C%20%7E%7E15%7B%5Cbf%201%7D_%7B4%7D%5D%7D%5E%7B%5Cmathrm%7BT%7D%7D)
 
 The precision matrix ![equation](https://latex.codecogs.com/gif.latex?%5COmega_1%20%3D%20%5Clambda_1%5Clambda_1%5ET%20&plus;%2010%20%5Cmathbb%7BI%7D). Similarly, ![equation](https://latex.codecogs.com/gif.latex?%5COmega_2%20%3D%20%5Clambda_2%5Clambda_2%5ET%20&plus;%2010%20%5Cmathbb%7BI%7D).
-Let `Sigma_1= \Omega_1 ^{-1}`, and `Sigma_2 = \Omega_2^{-1}`.
-We generate `n/2` samples from `Normal (0, \Sigma_1)` and `n/2` samples from `Normal (0, \Sigma_2)` to form our dataset.
+Let ![equation](https://latex.codecogs.com/gif.latex?%5CSigma_1%3D%20%5COmega_1%20%5E%7B-1%7D), and ![equation](https://latex.codecogs.com/gif.latex?%5CSigma_2%3D%20%5COmega_2%20%5E%7B-1%7D).
+We generate `n/2` samples from ![equation](https://latex.codecogs.com/gif.latex?%5Cmathcal%7BN%7D%280%2C%5CSigma_1%29) and `n/2` samples from ![equation](https://latex.codecogs.com/gif.latex?%5Cmathcal%7BN%7D%280%2C%5CSigma_2%29) to form our dataset.
 
 ## Generating the covariates
-We generate an `n*p` covariate matrix with entries = `-0.1` for each of the p variables for the population with precision matrix `\Omega_1` and entries = `0.1` for each of the p variables for the population with precision matrix `Omega_2`. Thus for each variable, the covariate value for an individual is univariate. As an example, the covariate attached to the FOXC2 protein expression of patient 1 is the univariate FOXC2 RNA expression for the same patient. If instead we used both the RNA expression and CNV expression for FOXC2 gene for the same patient, we would have a two-dimensional covariate attached to the data.
+We generate an ![equation](https://latex.codecogs.com/gif.latex?n%20%5Ctimes%20p) covariate matrix with entries = `-0.1` for each of the p variables for the population with precision matrix `\Omega_1` and entries = `0.1` for each of the p variables for the population with precision matrix `Omega_2`. Thus for each variable, the covariate value for an individual is univariate. As an example, the covariate attached to the FOXC2 protein expression of patient 1 is the univariate FOXC2 RNA expression for the same patient. If instead we used both the RNA expression and CNV expression for FOXC2 gene for the same patient, we would have a two-dimensional covariate attached to the data.
 
 ## Overview of the algorithm
 1. Fix a variable  `j` as response, and the remaining `p` variables as predictor. (Recall there are `p+1` variables total.
-2. From the covariate matrix, define an `n*n` weight matrix where the `i`th row describes the weight vector associated with the n subjects relative to subject `i`. The weights for this model are chosen with an ad-hoc bandwidth value of 0.1. Technically, one can perform a density estimation on the covariate space, but since its basically discrete, we choose a small value of 0.1 
+2. From the covariate matrix, define an ![equation](https://latex.codecogs.com/gif.latex?n%20%5Ctimes%20n) weight matrix where the `i`th row describes the weight vector associated with the n subjects relative to subject `i`. The weights for this model are chosen with an ad-hoc bandwidth value of 0.1. Technically, one can perform a density estimation on the covariate space, but since its basically discrete, we choose a small value of 0.1 
 3. Choose the hyperparameter values \pi and \sigma^2 following Carbonetto Stephens and sigma_{\beta}^2 over a grid.
 4. Call the cov_vsvb function to update the following variational parameters : The `n* p` matrices alpha, mu and S_sq where the `i`th row corresponds to the inclusion probability of the `p-1` predictor variables, mean and standard deviation for the `i`th subject.  
-5. Loop over the `p` variables as response to get the `(p+1)*p` matrices corresponding to each of the n subjects in the study.
-6. Assume that the diagonal elements in the inclusion probability matrices for each individual is `0`, and apply the post processing `\alpha_{jk}*=(\alpha_{jk} + \alpha_{kj})/2` to symmetrize the matrix.
-7. Set the dependence graph to be I{\alpha_{jk}*>0.5}.
+5. Loop over the `p` variables as response to get the ![equation](https://latex.codecogs.com/gif.latex?%28p&plus;1%29%29%20%5Ctimes%20p) matrices corresponding to each of the `n` subjects in the study.
+6. Assume that the diagonal elements in the inclusion probability matrices for each individual is `0`, and apply the post processing ![equation](https://latex.codecogs.com/gif.latex?%5Calpha_%7Bjk%7D%5E*%3D%28%5Calpha_%7Bjk%7D%20&plus;%20%5Calpha_%7Bkj%7D%29/2) to symmetrize the matrix.
+7. Set the dependence graph to be ![equation](https://latex.codecogs.com/gif.latex?%5Cmathbb%7BI%7D%5C%7B%5Calpha_%7Bjk%7D%5E*%3E0.5%5C%7D).
 
 
 ## Remarks 
