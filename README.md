@@ -49,6 +49,8 @@ In this file, instead of discrete covariate values, we have three clusters of co
 We set n=180 and `p=4`, i.e. there are `5` variables in this toy example. We have univariate covariates associated with every individual. 
 
 `Z ~ Uniform (-1,-0.3) U (-0.23, 0.33) U (0.43, 1)` corresponding to three well-separated clusters. 
-We have the precision matrix defined as a function of the covariate Z, through the var_cont function. 
+We have the precision matrix defined as a function of the covariate Z, through the var_cont function as 
+
+![equation(https://latex.codecogs.com/gif.latex?%5COmega%5Ei%28z_i%29%3D%20%5Cbegin%7Bbmatrix%7D%202%20%26%20%5Comega_%7B1%2C2%7D%28z_i%29%20%26%20%5Comega_%7B1%2C3%7D%28z_i%29%20%260%20%260%20%5C%5C%20%5Comega_%7B1%2C2%7D%28z_i%29%20%26%202%20%26%201%20%260%20%260%5C%5C%20%5Comega_%7B1%2C3%7D%28z_i%29%20%26%201%20%26%202%20%26%200%20%26%200%5C%5C%200%20%26%200%20%260%20%262%20%260%5C%5C%200%26%200%26%200%20%26%200%20%26%202%20%5Cend%7Bbmatrix%7D)
 
 The rest of the steps are identical to the discrete covariate case.
